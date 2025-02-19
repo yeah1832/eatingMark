@@ -5,7 +5,7 @@ import Modal from './components/Modal.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
 import AvailablePlaces from './components/AvailablePlaces.jsx';
-import { fetchUserPlaces, updateUserPlaces } from './http.js';
+import { fetchUserPlaces, updateUserPlaces, addOrUpdateUserPlace, deleteUserPlace } from './http.js';
 import ErrorPage from '../src/components/ErrorPage.jsx';
 
 function App() {
@@ -53,29 +53,32 @@ function App() {
     });
 
     try {
-      await updateUserPlaces([selectedPlace, ...userPlaces]);
+      await addOrUpdateUserPlace(selectedPlace);
     } catch (error) {
         setUserPlaces(userPlaces);
         setErrorUpdatingPlaces({message: error.message || "장소 업데이트에 실패했습니다."});
     }
   }
 
-  const handleRemovePlace = useCallback(async function handleRemovePlace() {
+  const handleRemovePlace = useCallback(async () => {
+    const placeIdToRemove = selectedPlace.current.id;
+
     setUserPlaces((prevPickedPlaces) =>
-      prevPickedPlaces.filter((place) => place.id !== selectedPlace.current.id)
+      prevPickedPlaces.filter((place) => place.id !== placeIdToRemove)
     );
 
     try {
-      await updateUserPlaces(
-        userPlaces.filter((place) => place.id !== selectedPlace.current.id)
-      );
-    }catch (error){
-      setUserPlaces(userPlaces);
-      setErrorUpdatingPlaces({message: error.message || "장소 삭제에 실패했습니다."});
+      // DELETE 요청을 통해 장소 삭제
+      await deleteUserPlace(placeIdToRemove);
+    } catch (error) {
+      setErrorUpdatingPlaces({
+        message: error.message || '장소 삭제에 실패했습니다.',
+      });
     }
 
     setModalIsOpen(false);
-  }, [userPlaces]);
+  }, []);
+
 
   function handleError() {
     setErrorUpdatingPlaces(null);
