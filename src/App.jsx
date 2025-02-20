@@ -5,7 +5,7 @@ import Modal from './components/Modal.jsx';
 import DeleteConfirmation from './components/DeleteConfirmation.jsx';
 import logoImg from './assets/logo.png';
 import AvailablePlaces from './components/AvailablePlaces.jsx';
-import { fetchUserPlaces, updateUserPlaces, addOrUpdateUserPlace, deleteUserPlace } from './http.js';
+import { fetchUserPlaces, addOrUpdateUserPlace, deleteUserPlace } from './http.js';
 import ErrorPage from '../src/components/ErrorPage.jsx';
 
 function App() {
@@ -56,7 +56,7 @@ function App() {
       await addOrUpdateUserPlace(selectedPlace);
     } catch (error) {
         setUserPlaces(userPlaces);
-        setErrorUpdatingPlaces({message: error.message || "장소 업데이트에 실패했습니다."});
+        setErrorUpdatingPlaces({message: error.message || "맛집 업데이트에 실패했습니다."});
     }
   }
 
@@ -72,7 +72,7 @@ function App() {
       await deleteUserPlace(placeIdToRemove);
     } catch (error) {
       setErrorUpdatingPlaces({
-        message: error.message || '장소 삭제에 실패했습니다.',
+        message: error.message || '맛집 삭제에 실패했습니다.',
       });
     }
 

@@ -10,7 +10,7 @@ export async function  fetchAvailablePlaces() {
 }
 
 export async function fetchUserPlaces(places) {
-  const response = await fetch('http://localhost:3000/user-places');
+  const response = await fetch('http://localhost:3000/users/places');
     const resData = await response.json();
 
     if (!response.ok) {
@@ -21,7 +21,7 @@ export async function fetchUserPlaces(places) {
 }
 
 export async function addOrUpdateUserPlace(place) {
-  const response = await fetch('http://localhost:3000/user-places', {
+  const response = await fetch('http://localhost:3000/users/places', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -37,10 +37,10 @@ export async function addOrUpdateUserPlace(place) {
 }
 
 export async function deleteUserPlace(placeId) {
-  const response = await fetch(`http://localhost:3000/user-places/${placeId}`, {
+  const response = await fetch(`http://localhost:3000/users/places/${placeId}`, {
     method: 'DELETE',
   });
-
+ß
   if (!response.ok) {
     throw new Error('사용자 데이터를 삭제하는 데 실패했습니다.');
   }
