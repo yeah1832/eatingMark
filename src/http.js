@@ -40,10 +40,10 @@ export async function deleteUserPlace(placeId) {
   const response = await fetch(`http://localhost:3000/users/places/${placeId}`, {
     method: 'DELETE',
   });
-ß
   if (!response.ok) {
     throw new Error('사용자 데이터를 삭제하는 데 실패했습니다.');
   }
 
-  return await response.json();
+  // 204 응답이면 JSON이 없으므로 null 반환
+  return response.status === 204 ? null : await response.json();
 }

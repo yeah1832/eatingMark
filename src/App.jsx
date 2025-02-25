@@ -114,7 +114,7 @@ function App() {
           title="저장된 맛집"
           fallbackText="방문하고 싶은 맛집을 선택하세요!"
           isLoading={isFetching}
-          loadingText="장소를 불러오는 중입니다."
+          loadingText="저장된 데이터를 불러오는 중입니다..."
           places={userPlaces}
           onSelectPlace={handleStartRemovePlace}
         />

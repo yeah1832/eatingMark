@@ -52,6 +52,7 @@ header p {
 
 .places-category {
   max-width: 85rem;
+  min-height: 20rem;
   margin: 2rem auto;
   padding: 1rem;
   border: 2px solid #0d373e;
